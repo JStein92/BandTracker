@@ -1,0 +1,66 @@
+@{
+  Layout = "_Layout";
+}
+<div class="row addBand">
+    <div class="page-header">
+      <h1>Add a new Venue</h1>
+    </div>
+    <form action="/venues" method="post" class="form-group">
+      <label for="name">Venue Name</label>
+      <input type="text" name="name" class="form-control" required>
+
+      <label for="address">Venue Address</label>
+      <input type="text" name="address" class="form-control"required>
+
+      <label for="capacity">Venue Capacity</label>
+      <input type="number" name="capacity" class="form-control"required>
+
+      <button type="submit" name="button" class="btn">Add</button>
+    </form>
+</div>
+
+<div class="page-header">
+  <h1>View All Venues</h1>
+</div>
+
+
+    @foreach(var venue in @Model["venues"])
+    {
+      <br>
+
+      <div class = "row bandRow">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h1>@venue.GetName() - @venue.GetGenre()<h1></div>
+      </div>
+
+      <div class="row">
+      <div class = "col-md-6">
+      <h3>Bands played here</h3>
+        <div class="well">
+          @foreach(var band in @venue.GetBands())
+          {
+              <p>@band.GetName()</p>
+          }
+        </div>
+
+        </div>
+        <div class="col-md-6">
+      <form action="/venues/new-bands" method="post">
+
+          <label for="sel2"><h3>Add a band played at @venue.GetName()</h3></label>
+           <select multiple class="form-control" name="bands" required>
+             @foreach(var band in Model["bands"])
+             {
+                 <option value="@band.GetId()">@band.GetName()</option>
+             }
+             <input type="hidden" value="@venue.GetId()" name="venueId">
+            </select>
+
+          <button type="submit" class="btn btn-success addVenue" name="button">Add band</button>
+
+      </form>
+      </div>
+      </div>
+    </div>
+
+    }

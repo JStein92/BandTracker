@@ -1,0 +1,70 @@
+@{
+  Layout = "_Layout";
+}
+<div class="row addBand">
+    <div class="page-header">
+      <h1>Add a new Band</h1>
+    </div>
+    <form action="/bands" method="post" class="form-group">
+      <label for="name">Band Name</label>
+      <input type="text" name="name" class="form-control" required>
+
+      <label for="genre">Band Genre</label>
+      <input type="text" name="genre" class="form-control"required>
+
+      <label for="image">Band Image URL</label>
+      <input type="text" name="image" class="form-control"required>
+
+      <button type="submit" name="button" class="btn">Add</button>
+    </form>
+
+</div>
+
+<div class="page-header">
+  <h1>View All Bands</h1>
+</div>
+
+    @foreach(var band in @Model["bands"])
+    {
+      <br>
+
+      <div class = "row bandRow">
+      <div class="panel panel-default">
+      <form action="/bandDetails" method="post">
+        <div class="panel-heading"><h1>@band.GetName() - @band.GetGenre()
+        <input type="hidden" name="bandId" value="@band.GetId()">
+        <button type="submit" class="btn btn-info edit">Edit</button><h1></div>
+        </form>
+      </div>
+
+      <div class="row">
+      <div class = "col-md-6">
+      <h3>Venues this band has played</h3>
+        <div class="well">
+          @foreach(var venue in @band.GetVenues())
+          {
+              <p>@venue.GetName()</p>
+          }
+        </div>
+
+        </div>
+        <div class="col-md-6">
+      <form action="/bands/new-venues" method="post">
+
+          <label for="sel2"><h3>Add a venue @band.GetName() has played:</h3></label>
+           <select multiple class="form-control" name="venues" required>
+             @foreach(var venue in Model["venues"])
+             {
+                 <option value="@venue.GetId()">@venue.GetName()</option>
+             }
+             <input type="hidden" value="@band.GetId()" name="bandId">
+            </select>
+
+          <button type="submit" class="btn btn-success addVenue" name="button">Add venue</button>
+
+      </form>
+      </div>
+      </div>
+    </div>
+
+    }

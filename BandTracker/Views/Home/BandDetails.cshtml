@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="page-header">
+  <h1>Band Details for @Model.GetName()</h1>
+</div>
+
+<div class="row addBand">
+    <div class="page-header">
+      <h1>Edit Band Details for @Model.GetName()</h1>
+    </div>
+    <form action="/bands/edited" method="post" class="form-group">
+      <label for="name">Band Name</label>
+      <input type="text" name="name" class="form-control" value="@Model.GetName()"required>
+
+      <label for="genre">Band Genre</label>
+      <input type="text" name="genre" class="form-control" value="@Model.GetGenre()"required>
+
+      <label for="image">Band Image URL</label>
+      <input type="text" name="image" class="form-control" value="@Model.GetImage()"required>
+
+      <input type="hidden" name="bandId" value="@Model.GetId()">
+
+      <button type="submit" name="button" class="btn">Submit</button>
+    </form>
+</div>
+
+<h3>Venues this band has played</h3>
+  <div class="well">
+    @foreach(var venue in @Model.GetVenues())
+    {
+        <p>@venue.GetName()</p>
+    }
+  </div>

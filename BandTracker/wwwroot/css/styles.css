@@ -1,5 +1,6 @@
 body{
   font-family: 'Fjalla One', sans-serif;
+  text-align: center;
 }
 
 .centered{
@@ -25,4 +26,16 @@ body{
   margin-left: 20px;
   font-size: .8em;
   margin: 10px;
+}
+.addBand{
+  background-color: #eff5ff;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.bandRow{
+  background-color:  #eff9e8;
+  padding: 30px;
+}
+.edit{
+margin-left: 10px;
 }
