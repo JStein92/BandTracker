@@ -14,7 +14,7 @@ namespace BandTracker.Tests
     }
     public void Dispose()
     {
-       Venue.DeleteAll();
+       Band.DeleteAll();
        Venue.DeleteAll();
     }
 
@@ -80,5 +80,23 @@ namespace BandTracker.Tests
 
       CollectionAssert.AreEqual(expected, actual);
     }
+
+    [TestMethod]
+    public void AddBand_AddBandToJoinTable_ListBands()
+    {
+      Band newBand = new Band("Beatles", "Rock", "www.image.com/image.jpg");
+      newBand.Save();
+
+      Venue newVenue = new Venue("Key Arena", "Seattle WA", 3000);
+      newVenue.Save();
+
+      newVenue.AddBand(newBand.GetId());
+
+      List<Band> expected = new List<Band>{newBand};
+      List<Band> actual = newVenue.GetBands();
+
+      CollectionAssert.AreEqual(expected,actual);
+    }
+
   }
 }

@@ -14,8 +14,8 @@ namespace BandTracker.Tests
     }
     public void Dispose()
     {
-      Venue.DeleteAll();
       Band.DeleteAll();
+      Venue.DeleteAll();
     }
 
     [TestMethod]
@@ -86,9 +86,6 @@ namespace BandTracker.Tests
     {
       Band newBand = new Band("Beatles", "Rock", "www.image.com/image.jpg");
       newBand.Save();
-
-      Band newBand2 = new Band("Monkeys", "Roll", "www.test.com/image.jpg");
-      newBand2.Save();
 
       Venue newVenue = new Venue("Key Arena", "Seattle WA", 3000);
       newVenue.Save();

@@ -193,6 +193,68 @@ namespace BandTracker.Models
       }
     }
 
+    public void AddBand(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO bands_venues (band_id, venue_id) VALUES (@bandId, @thisId);";
+
+      MySqlParameter idParameter = new MySqlParameter();
+      idParameter.ParameterName = "@thisId";
+      idParameter.Value = _id;
+      cmd.Parameters.Add(idParameter);
+
+      MySqlParameter bandId = new MySqlParameter();
+      bandId.ParameterName = "@bandId";
+      bandId.Value = id;
+      cmd.Parameters.Add(bandId);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public List<Band> GetBands()
+    {
+      List<Band> venueBands = new List<Band>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT bands.* FROM venues
+      JOIN bands_venues ON (venues.id = bands_venues.venue_id)
+      JOIN bands ON (bands_venues.band_id = bands.id)
+      WHERE venues.id = @thisId;";
+
+      MySqlParameter idParameter = new MySqlParameter();
+      idParameter.ParameterName = "@thisId";
+      idParameter.Value = _id;
+      cmd.Parameters.Add(idParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        string genre = rdr.GetString(2);
+        string image = rdr.GetString(3);
+
+        Band newBand = new Band(name, genre, image, id);
+        venueBands.Add(newBand);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return venueBands;
+    }
+
   }
 
 }
