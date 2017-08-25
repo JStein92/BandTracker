@@ -26,7 +26,7 @@ namespace BandTracker.Models
     {
       return _name;
     }
-    public string GetGenre()
+    public string GetAddress()
     {
       return _address;
     }
@@ -46,7 +46,7 @@ namespace BandTracker.Models
         Venue newVenue = (Venue) otherVenue;
         bool idEquality = this.GetId() == newVenue.GetId();
         bool nameEquality = this.GetName() == newVenue.GetName();
-        bool addressEquality = this.GetGenre() == newVenue.GetGenre();
+        bool addressEquality = this.GetAddress() == newVenue.GetAddress();
         bool capacityEquality = this.GetCapacity() == newVenue.GetCapacity();
         return (idEquality && nameEquality && addressEquality && capacityEquality);
       }
@@ -295,6 +295,33 @@ namespace BandTracker.Models
       }
       return venueBands;
     }
+
+    public void RemoveBand(int bandId)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM bands_venues WHERE venue_id = @thisId AND band_id = @bandId;";
+
+      MySqlParameter idParameter = new MySqlParameter();
+      idParameter.ParameterName = "@thisId";
+      idParameter.Value = _id;
+      cmd.Parameters.Add(idParameter);
+
+      MySqlParameter bandIdParameter = new MySqlParameter();
+      bandIdParameter.ParameterName = "@bandId";
+      bandIdParameter.Value = bandId;
+      cmd.Parameters.Add(bandIdParameter);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
 
   }
 

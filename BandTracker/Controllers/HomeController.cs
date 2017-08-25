@@ -117,13 +117,88 @@ namespace BandTracker.Controllers
       {
         Band foundBand = Band.Find(int.Parse(Request.Form["bandId"]));
         foundBand.Update(Request.Form["name"], Request.Form["genre"], Request.Form["image"]);
-        
+
         Dictionary<string, object> model = new Dictionary<string,object>{};
         model.Add("bands", Band.GetAll());
         model.Add("venues", Venue.GetAll());
 
         return View("bands",model);
       }
+
+      [HttpPost("/venueDetails")]
+      public ActionResult VenueDetails()
+      {
+
+        Venue foundVenue = Venue.Find(int.Parse(Request.Form["venueId"]));
+        return View("VenueDetails",foundVenue);
+      }
+
+      [HttpPost("/venues/edited")]
+      public ActionResult VenueDetailsEdit()
+      {
+        Venue foundVenue = Venue.Find(int.Parse(Request.Form["venueId"]));
+        foundVenue.Update(Request.Form["name"], Request.Form["address"], int.Parse(Request.Form["capacity"]));
+
+        Dictionary<string, object> model = new Dictionary<string,object>{};
+        model.Add("bands", Band.GetAll());
+        model.Add("venues", Venue.GetAll());
+
+        return View("venues",model);
+      }
+
+      [HttpPost("/bands/removed")]
+      public ActionResult BandsRemoved()
+      {
+        Band foundBand = Band.Find(int.Parse(Request.Form["bandId"]));
+        foundBand.Delete();
+        Dictionary<string, object> model = new Dictionary<string,object>{};
+
+        model.Add("bands", Band.GetAll());
+        model.Add("venues", Venue.GetAll());
+        return View("bands",model);
+      }
+
+      [HttpPost("/venues/removed")]
+      public ActionResult VenuesRemoved()
+      {
+        Venue foundVenue = Venue.Find(int.Parse(Request.Form["venueId"]));
+        foundVenue.Delete();
+        Dictionary<string, object> model = new Dictionary<string,object>{};
+
+        model.Add("bands", Band.GetAll());
+        model.Add("venues", Venue.GetAll());
+        return View("venues",model);
+      }
+
+      [HttpPost("/bands/removeVenue")]
+      public ActionResult BandsVenueRemoved()
+      {
+        Band foundBand = Band.Find(int.Parse(Request.Form["bandId"]));
+
+        foundBand.RemoveVenue(int.Parse(Request.Form["venueId"]));
+
+        Dictionary<string, object> model = new Dictionary<string,object>{};
+
+        model.Add("bands", Band.GetAll());
+        model.Add("venues", Venue.GetAll());
+        return View("bands",model);
+      }
+
+      [HttpPost("/venues/removeBand")]
+      public ActionResult VenuesBandRemoved()
+      {
+        Venue foundVenue = Venue.Find(int.Parse(Request.Form["venueId"]));
+
+        foundVenue.RemoveBand(int.Parse(Request.Form["bandId"]));
+
+        Dictionary<string, object> model = new Dictionary<string,object>{};
+
+        model.Add("bands", Band.GetAll());
+        model.Add("venues", Venue.GetAll());
+        return View("venues",model);
+      }
+
+
 
     }
 }

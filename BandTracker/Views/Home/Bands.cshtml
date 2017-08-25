@@ -28,8 +28,8 @@
     {
       <br>
 
-      <div class = "row bandRow">
-      <div class="panel panel-default">
+      <div class = "row bandRow" style="background-image: linear-gradient(to bottom, rgba(0,0,0,.1) 0%,rgba(0,0,0,.5) 100%), url(@band.GetImage())">
+      <div class="panel panel-info">
       <form action="/bandDetails" method="post">
         <div class="panel-heading"><h1>@band.GetName() - @band.GetGenre()
         <input type="hidden" name="bandId" value="@band.GetId()">
@@ -39,19 +39,24 @@
 
       <div class="row">
       <div class = "col-md-6">
-      <h3>Venues this band has played</h3>
-        <div class="well">
+      <div class="panel panel-info">
+      <div class="panel-heading"><h3>Venues this band has played</h3></div>
           @foreach(var venue in @band.GetVenues())
           {
-              <p>@venue.GetName()</p>
+            <form action="/bands/removeVenue" method="post">
+              <h4>@venue.GetName() <button type="submit" name="button" class="btn btn-danger">X</button></h4>
+              <input type="hidden" name="bandId" value="@band.GetId()">
+              <input type="hidden" name="venueId" value="@venue.GetId()">
+            </form>
           }
         </div>
 
         </div>
         <div class="col-md-6">
-      <form action="/bands/new-venues" method="post">
 
-          <label for="sel2"><h3>Add a venue @band.GetName() has played:</h3></label>
+      <form action="/bands/new-venues" method="post">
+    <div class="panel panel-info">
+        <div class="panel-heading">  <h3>Add a venue @band.GetName() has played</div>
            <select multiple class="form-control" name="venues" required>
              @foreach(var venue in Model["venues"])
              {
@@ -61,10 +66,12 @@
             </select>
 
           <button type="submit" class="btn btn-success addVenue" name="button">Add venue</button>
-
+      </div>
       </form>
+
       </div>
       </div>
     </div>
 
     }
+    

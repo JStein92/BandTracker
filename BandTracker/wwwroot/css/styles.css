@@ -9,7 +9,7 @@ body{
 .jumbotron{
   background-image: url("../img/header.png");
   background-position: center;
-  padding: 150px;
+  padding: 50px;
 }
 .jumbotron h1{
     font-size: 8em;
@@ -35,7 +35,29 @@ body{
 .bandRow{
   background-color:  #eff9e8;
   padding: 30px;
+  background-size:cover;
+}
+.bandRow::after {
+  content: "";
+  background-color: white;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
 .edit{
 margin-left: 10px;
+}
+
+.panel{
+background-color: #f4f8ff;
+opacity: .9;
+}
+.footer{
+
+  opacity: .5;
+margin-top: 30px;
 }

@@ -22,14 +22,11 @@
 
       <input type="hidden" name="bandId" value="@Model.GetId()">
 
-      <button type="submit" name="button" class="btn">Submit</button>
+      <button type="submit" name="button" class="btn">Submit Changes</button>
     </form>
 </div>
-
-<h3>Venues this band has played</h3>
-  <div class="well">
-    @foreach(var venue in @Model.GetVenues())
-    {
-        <p>@venue.GetName()</p>
-    }
-  </div>
+<br>
+  <form action="/bands/removed" method="post">
+    <button type="submit" class="btn btn-danger" name="button">Remove this Band</button>
+    <input type="hidden" name="bandId" value="@Model.GetId()">
+  </form>

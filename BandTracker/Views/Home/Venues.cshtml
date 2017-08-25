@@ -27,39 +27,45 @@
     @foreach(var venue in @Model["venues"])
     {
       <br>
+      <div class ="row bandRow">
+        <div class="panel panel-default">
+            <form action="/venueDetails" method="post">
+              <div class="panel-heading"><h1>@venue.GetName() - @venue.GetAddress() <button type="submit" class="btn btn-info edit">Edit</button></h1>
+              <h4>Capacity of @venue.GetCapacity()</h4></div>
+                <input type="hidden" name="venueId" value="@venue.GetId()">
 
-      <div class = "row bandRow">
-      <div class="panel panel-default">
-        <div class="panel-heading"><h1>@venue.GetName() - @venue.GetGenre()<h1></div>
-      </div>
-
+              </form>
+          </div>
       <div class="row">
-      <div class = "col-md-6">
-      <h3>Bands played here</h3>
-        <div class="well">
-          @foreach(var band in @venue.GetBands())
-          {
-              <p>@band.GetName()</p>
-          }
+
+        <div class = "col-md-6">
+        <h3>Bands that played at @venue.GetName()</h3>
+          <div class="well">
+            @foreach(var band in @venue.GetBands())
+            {
+              <form action="/venues/removeBand" method="post">
+                <h4>@band.GetName() <button type="submit" name="button" class="btn btn-danger">X</button></h4>
+                <input type="hidden" name="bandId" value="@band.GetId()">
+                <input type="hidden" name="venueId" value="@venue.GetId()">
+              </form>
+            }
+          </div>
         </div>
 
+          <div class="col-md-6">
+            <form action="/venues/new-bands" method="post">
+            <label for="sel2"><h3>Add a band that played at @venue.GetName()</h3></label>
+             <select multiple class="form-control" name="bands" required>
+               @foreach(var band in Model["bands"])
+               {
+                   <option value="@band.GetId()">@band.GetName()</option>
+               }
+               <input type="hidden" value="@venue.GetId()" name="venueId">
+              </select>
+
+            <button type="submit" class="btn btn-success addVenue" name="button">Add band</button>
+        </form>
         </div>
-        <div class="col-md-6">
-      <form action="/venues/new-bands" method="post">
-
-          <label for="sel2"><h3>Add a band played at @venue.GetName()</h3></label>
-           <select multiple class="form-control" name="bands" required>
-             @foreach(var band in Model["bands"])
-             {
-                 <option value="@band.GetId()">@band.GetName()</option>
-             }
-             <input type="hidden" value="@venue.GetId()" name="venueId">
-            </select>
-
-          <button type="submit" class="btn btn-success addVenue" name="button">Add band</button>
-
-      </form>
-      </div>
       </div>
     </div>
 

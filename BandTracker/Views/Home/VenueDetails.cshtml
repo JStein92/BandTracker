@@ -3,25 +3,30 @@
 }
 
 <div class="page-header">
-  <h1>Venue details for @Model.GetName()</h1>
+  <h1>Venue Details for @Model.GetName()</h1>
 </div>
 
-<div class="row addBand">
+<div class="row addVenue">
     <div class="page-header">
-      <h1>Edit Band Details for @Model.GetName()</h1>
+      <h1>Edit Venue Details for @Model.GetName()</h1>
     </div>
-    <form action="/bands/edited" method="post" class="form-group">
-      <label for="name">Band Name</label>
+    <form action="/venues/edited" method="post" class="form-group">
+      <label for="name">Venue Name</label>
       <input type="text" name="name" class="form-control" value="@Model.GetName()"required>
 
-      <label for="genre">Band Genre</label>
-      <input type="text" name="genre" class="form-control" value="@Model.GetGenre()"required>
+      <label for="address">Venue Address</label>
+      <input type="text" name="address" class="form-control" value="@Model.GetAddress()"required>
 
-      <label for="image">Band Image URL</label>
-      <input type="text" name="image" class="form-control" value="@Model.GetImage()"required>
+      <label for="Capacity">Venue Capacity</label>
+      <input type="number" name="Capacity" class="form-control" value="@Model.GetCapacity()"required>
 
-      <input type="hidden" name="bandId" value="@Model.GetId()">
+      <input type="hidden" name="venueId" value="@Model.GetId()">
 
-      <button type="submit" name="button" class="btn">Submit</button>
+      <button type="submit" name="button" class="btn">Submit Changes</button>
     </form>
 </div>
+
+<form action="/venues/removed" method="post">
+  <button type="submit" class="btn btn-danger" name="button">Remove this Venue</button>
+  <input type="hidden" name="venueId" value="@Model.GetId()">
+</form>
