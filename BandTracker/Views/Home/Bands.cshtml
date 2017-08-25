@@ -58,7 +58,7 @@
     <div class="panel panel-info">
         <div class="panel-heading">  <h3>Add a venue @band.GetName() has played</div>
            <select multiple class="form-control" name="venues" required>
-             @foreach(var venue in Model["venues"])
+             @foreach(var venue in band.GetUniqueVenues())
              {
                  <option value="@venue.GetId()">@venue.GetName()</option>
              }
@@ -74,4 +74,3 @@
     </div>
 
     }
-    

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System;
+using System.Linq;
 
 namespace BandTracker.Models
 {
@@ -353,6 +354,14 @@ namespace BandTracker.Models
         conn.Dispose();
       }
       return allBandsFound;
+    }
+
+    public List<Venue> GetUniqueVenues()
+    {
+      List<Venue> allVenues = Venue.GetAll();
+      List<Venue> bandVenues = this.GetVenues();
+
+      return allVenues.Except(bandVenues).ToList();
     }
 
   }

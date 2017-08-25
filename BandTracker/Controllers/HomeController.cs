@@ -107,7 +107,6 @@ namespace BandTracker.Controllers
       [HttpPost("/bandDetails")]
       public ActionResult BandDetails()
       {
-        Console.WriteLine(Request.Form["bandId"]);
         Band foundBand = Band.Find(int.Parse(Request.Form["bandId"]));
         return View("BandDetails",foundBand);
       }
@@ -174,11 +173,9 @@ namespace BandTracker.Controllers
       public ActionResult BandsVenueRemoved()
       {
         Band foundBand = Band.Find(int.Parse(Request.Form["bandId"]));
-
         foundBand.RemoveVenue(int.Parse(Request.Form["venueId"]));
 
         Dictionary<string, object> model = new Dictionary<string,object>{};
-
         model.Add("bands", Band.GetAll());
         model.Add("venues", Venue.GetAll());
         return View("bands",model);

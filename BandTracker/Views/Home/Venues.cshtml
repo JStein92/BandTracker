@@ -56,7 +56,7 @@
             <form action="/venues/new-bands" method="post">
             <label for="sel2"><h3>Add a band that played at @venue.GetName()</h3></label>
              <select multiple class="form-control" name="bands" required>
-               @foreach(var band in Model["bands"])
+               @foreach(var band in venue.GetUniqueBands())
                {
                    <option value="@band.GetId()">@band.GetName()</option>
                }
