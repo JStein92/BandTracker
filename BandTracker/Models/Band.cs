@@ -11,7 +11,7 @@ namespace BandTracker.Models
     private string _genre;
     private string _image;
 
-    public Band(string name, string genre, string image, int id = 0)
+    public Band(string name, string genre, string image = "", int id = 0)
     {
       _name = name;
       _genre = genre;
