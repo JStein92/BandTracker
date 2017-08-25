@@ -184,7 +184,48 @@ namespace BandTracker.Models
       idParameter.Value = _id;
       cmd.Parameters.Add(idParameter);
 
-       cmd.ExecuteNonQuery();
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public void Update(string newName, string newAddress, int newCapacity)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE venues SET name = @name, address = @address, capacity = @capacity WHERE id = @thisId;";
+
+      MySqlParameter idParameter = new MySqlParameter();
+      idParameter.ParameterName = "@thisId";
+      idParameter.Value = _id;
+      cmd.Parameters.Add(idParameter);
+
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@name";
+      name.Value = newName;
+      cmd.Parameters.Add(name);
+
+      MySqlParameter address = new MySqlParameter();
+      address.ParameterName = "@address";
+      address.Value = newAddress;
+      cmd.Parameters.Add(address);
+
+      MySqlParameter capacity = new MySqlParameter();
+      capacity.ParameterName = "@capacity";
+      capacity.Value =newCapacity;
+      cmd.Parameters.Add(capacity);
+
+      cmd.ExecuteNonQuery();
+
+      _name = newName;
+      _address = newAddress;
+      _capacity = newCapacity;
 
       conn.Close();
       if(conn != null)

@@ -97,5 +97,19 @@ namespace BandTracker.Tests
 
       CollectionAssert.AreEqual(expected,actual);
     }
+
+    [TestMethod]
+    public void Update_UpdateBandInfoInDB_Band()
+    {
+      Band newBand = new Band("Beatles", "Rock", "www.image.com/image.jpg");
+      newBand.Save();
+
+      newBand.Update("Beatles 2", "Ska", "www.ska.com/beatles2.jpg");
+
+      Band expected = newBand;
+      Band actual = Band.Find(newBand.GetId());
+
+      Assert.AreEqual(expected,actual);
+    }
   }
 }

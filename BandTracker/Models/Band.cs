@@ -193,6 +193,47 @@ namespace BandTracker.Models
       }
     }
 
+    public void Update(string newName, string newGenre, string newImage)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE bands SET name = @name, genre = @genre, image = @image WHERE id = @thisId;";
+
+      MySqlParameter idParameter = new MySqlParameter();
+      idParameter.ParameterName = "@thisId";
+      idParameter.Value = _id;
+      cmd.Parameters.Add(idParameter);
+
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@name";
+      name.Value = newName;
+      cmd.Parameters.Add(name);
+
+      MySqlParameter genre = new MySqlParameter();
+      genre.ParameterName = "@genre";
+      genre.Value = newGenre;
+      cmd.Parameters.Add(genre);
+
+      MySqlParameter image = new MySqlParameter();
+      image.ParameterName = "@image";
+      image.Value = newImage;
+      cmd.Parameters.Add(image);
+
+      _name = newName;
+      _genre = newGenre;
+      _image = newImage;
+
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
     public void AddVenue(int id)
     {
       MySqlConnection conn = DB.Connection();
