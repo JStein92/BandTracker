@@ -42,23 +42,20 @@ ___
 ### _Content_ ###
 
 Index.cshtml:
+- Splash page
 
- - Splash page - view bands, view venues
+Bands.cshtml
+- View list of bands, add bands, add/remove venues to bands
 
-ClientDetails.cshtml
-- View band details
-
-ClientForm.cshtml
-- Submit a new band
-
-ClientsAll.cshtml
-- View all bands
+Venues.cshtml
+- View list of venues, add venues, add/remove bands to venues
 
 BandDetails.cshtml
-- View stylist details, including their bands
+- View/change band details, remove band
 
-BandForm.cshtml
-- Submit a new stylist
+VenueDetails.cshtml
+- View/change venue details, remove venue
+
 
 Other:
 - Client.cs
@@ -75,13 +72,21 @@ Other:
 1. Download project from GitHub: https://github.com/JStein92/BandTracker
 2. Run HTML in preferred browser
 3. Follow instructions on page
-  - Create a new stylist and use an image from WWWRoot folder (supplied)
-  - Create bands for the venue
+  - Create new bands/venues
+  - Add venues to bands and bands to venues
+  - Remove bands and venues and relationships between them
 
 
 ### _Database Setup_ ###
 
 CREATE DATABASE band_tracker;
+
+mysql> CREATE TABLE bands (id serial PRIMARY KEY, name VARCHAR(255), genre VARCHAR(255), image varchar(255));
+
+mysql> CREATE TABLE venues (id serial PRIMARY KEY, name VARCHAR(255), address VARCHAR(255), capacity INT);
+
+CREATE DATABASE band_tracker_test;
+USE band_tracker_test;
 
 mysql> CREATE TABLE bands (id serial PRIMARY KEY, name VARCHAR(255), genre VARCHAR(255), image varchar(255));
 
