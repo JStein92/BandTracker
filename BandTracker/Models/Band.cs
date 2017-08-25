@@ -321,6 +321,40 @@ namespace BandTracker.Models
         conn.Dispose();
       }
     }
+
+    public static List<Band> Search(string bandName)
+    {
+      List<Band> allBandsFound = new List<Band> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM bands WHERE name LIKE CONCAT('%',@bandName,'%');";
+
+      MySqlParameter bandNameParameter = new MySqlParameter();
+      bandNameParameter.ParameterName = "@bandName";
+      bandNameParameter.Value = bandName;
+      cmd.Parameters.Add(bandNameParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        string genre = rdr.GetString(2);
+        string image = rdr.GetString(3);
+
+        Band newBand = new Band(name, genre, image, id);
+        allBandsFound.Add(newBand);
+      }
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return allBandsFound;
+    }
+
   }
 
 }

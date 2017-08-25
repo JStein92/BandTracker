@@ -198,6 +198,28 @@ namespace BandTracker.Controllers
         return View("venues",model);
       }
 
+      [HttpPost("/bands/search")]
+      public ActionResult BandSearch()
+      {
+        string searchQuery = Request.Form["bandSearch"];
+        Dictionary<string, object> model = new Dictionary<string,object>{};
+
+        model.Add("bands", Band.Search(searchQuery));
+        model.Add("venues", Venue.GetAll());
+        return View("bands",model);
+      }
+
+      [HttpPost("/venues/search")]
+      public ActionResult VenueSearch()
+      {
+        string searchQuery = Request.Form["venueSearch"];
+        Dictionary<string, object> model = new Dictionary<string,object>{};
+
+        model.Add("bands", Band.GetAll());
+        model.Add("venues", Venue.Search(searchQuery));
+        return View("venues",model);
+      }
+
 
 
     }

@@ -18,15 +18,20 @@ body{
 .navbar{
   font-size: 2em;
   padding: 10px;
+  text-align: center;
+}
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
 }
 .search{
-  font-size: .8em;
+text-align: center;
 }
-.search-md{
-  margin-left: 20px;
-  font-size: .8em;
-  margin: 10px;
-}
+
 .addBand{
   background-color: #eff5ff;
   padding-left: 100px;

@@ -6,12 +6,19 @@
       <li><a href="/">Home</a></li>
       <li><a href="/bands">Bands</a></li>
       <li><a href="/venues">Venues</a></li>
+
+
+        <form class="form-inline my-2 my-lg-0 vertical-center" action="/venues/search" method="post">
+           <input class="form-control mr-md-2 search-md" type="text" placeholder="Find Venue" name="venueSearch">
+           <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
+        </form>
+
+          <form class="form-inline my-2 my-lg-0 vertical-center" action="/bands/search" method="post">
+             <input class="form-control mr-md-2 search-md" type="text" placeholder="Find Band" name="bandSearch">
+             <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
+          </form>
+
     </ul>
+      </div>
 
-    <form class="form-inline my-2 my-lg-0 vertical-center">
-       <input class="form-control mr-md-2 search-md" type="text" placeholder="Find Band or Venue">
-       <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
-    </form>
-
-  </div>
 </nav>
