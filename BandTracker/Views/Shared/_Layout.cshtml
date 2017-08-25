@@ -3,17 +3,26 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Scissors Paper Rock</title>
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-  <link rel="stylesheet" href="/css/styles.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <title>Band Tracker</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="js/scripts.js" type="text/javascript">
-
   </script>
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet"> 
 </head>
 
 <body>
-  @RenderBody()
+  <div class="jumbotron centered">
+    <h1>Band Tracker</h1>
+  </div>
+  <div class="container">
+    @Html.Partial("Header")
+    @RenderBody()
+    @Html.Partial("Footer")
+  </div>
+
 </body>
 
 </html>

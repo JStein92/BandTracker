@@ -1,0 +1,28 @@
+body{
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.centered{
+  text-align: center;
+}
+.jumbotron{
+  background-image: url("../img/header.png");
+  background-position: center;
+  padding: 150px;
+}
+.jumbotron h1{
+    font-size: 8em;
+    text-shadow: 3px 3px #edf3ff;
+}
+.navbar{
+  font-size: 2em;
+  padding: 10px;
+}
+.search{
+  font-size: .8em;
+}
+.search-md{
+  margin-left: 20px;
+  font-size: .8em;
+  margin: 10px;
+}
