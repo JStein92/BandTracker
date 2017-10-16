@@ -79,15 +79,6 @@ Other:
 
 ### _Database Setup_ ###
 
-CREATE DATABASE band_tracker;
-
-mysql> CREATE TABLE bands (id serial PRIMARY KEY, name VARCHAR(255), genre VARCHAR(255), image varchar(255));
-
-mysql> CREATE TABLE venues (id serial PRIMARY KEY, name VARCHAR(255), address VARCHAR(255), capacity INT);
-
-CREATE DATABASE band_tracker_test;
-USE band_tracker_test;
-
-mysql> CREATE TABLE bands (id serial PRIMARY KEY, name VARCHAR(255), genre VARCHAR(255), image varchar(255));
-
-mysql> CREATE TABLE venues (id serial PRIMARY KEY, name VARCHAR(255), address VARCHAR(255), capacity INT);
+Launch PHPMyAdmin with MAMP or WAMP.
+Change Port to 8889
+Import .SQL file
