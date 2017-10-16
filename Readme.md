@@ -79,6 +79,6 @@ Other:
 
 ### _Database Setup_ ###
 
-Launch PHPMyAdmin with MAMP or WAMP.
-Change Port to 8889
-Import .SQL file
+- Launch PHPMyAdmin with MAMP or WAMP.
+- Change Port to 8889
+- Import .SQL file
